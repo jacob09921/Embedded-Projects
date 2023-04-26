@@ -1,13 +1,13 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css"> // Bootstrap
 <body onload="javascript:mc_init()">
 <title>Group 2 Controller</title>
  <div style = "text-align:center; color:blue;">
  <h2> Group 2 Controller </h2>
  </div>
-  <div class="container">
-    <div class="row cols-sm-6 col-sm-offset-4">
+  <div class="container"> // grid system
+    <div class="row cols-sm-6 col-sm-offset-4"> // responsive page
       <!-- Adding a slider for controlling speed -->
       <input type="range" min="0" max="100" value="50" id="speedSlider"
       oninput="setSpeed()" />
@@ -46,30 +46,30 @@
     // Initialiaze the websocket client
 		socket = new WebSocket('ws://' + window.location.hostname + ':81/');
     var buttons = document.getElementsByTagName('button');
-    for(i=0;i<buttons.length;i++) {
+    for(i=0;i<buttons.length;i++) {    // creating capabilites of all buttons
       buttons[i].addEventListener('mousedown',move,true);
       buttons[i].addEventListener('mouseup',stop,true);
       buttons[i].addEventListener('touchstart',move,true);
       buttons[i].addEventListener('touchend',stop,true);
     }
   }
-  function setSpeed() {
+  function setSpeed() { // functions that will send to C++ program
     speed = document.getElementById("speedSlider").value;
     speed = parseInt(speed).toFixed(0);
     document.getElementById("speedLabel").innerHTML = "Speed: " + speed + "%";
     return false;
   }
-  function move(e) {
+  function move(e) { / functions that will send to C++ program
     e.preventDefault(); // prevent copy-paste menu pop-up on mobile!
     var data = {'direction':e.srcElement.id,'speed':speed};
 	  socket.send(JSON. stringify(data));
     return false;
   }
-  function stop() {
+  function stop() { / functions that will send to C++ program
     var data = {'direction':'STP'};
 	  socket.send(JSON. stringify(data));
     return false;
   }
-</script>
+</script> 
 </body>
 </html>
