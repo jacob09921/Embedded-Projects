@@ -1,19 +1,21 @@
- #include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
+// websocket library to help establish connection between html, css, javascript and C++
+#include <ESP8266WiFi.h> 
+#include <ESP8266WebServer.h> 
 #include <FS.h>
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 #include <WiFiClient.h>
 
-ESP8266WebServer server(80);
-char* ssid = "Group-2";
-char* password = "poginipat";
+ESP8266WebServer server(80); // creating variable from class
+char* ssid = "Group-2"; // name of the wifi
+char* password = "poginipat"; // password of the wifi
 
 // hold uploaded file
 File fsUploadFile;
 
 // websockets server for handling messages sent by the client
 WebSocketsServer webSocket = WebSocketsServer(81);
+ // pin form nodemcu microprocessor
 const byte gear1 = D1;
 const byte gear2 = D2;
 const byte gear3 = D3;
@@ -21,7 +23,7 @@ const byte gear4 = D4;
 const byte relay = D5;
 int num;
 
-
+// setup all the configurations for the nodemcu processor and pins
 void setup(void)
 {
    Serial.begin(115200);
@@ -58,6 +60,7 @@ void setup(void)
   digitalWrite(relay, LOW);
 }
 
+// it loops the main programm which is nice
 void loop()
 {
   webSocket.loop();
